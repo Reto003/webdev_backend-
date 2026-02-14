@@ -81,4 +81,8 @@ authRouter.post('/login',async (req,res)=>{
   })
 })
 
+authRouter.get('/get-me',async (req,res)=>{
+  // code
+})
+
 module.exports = authRouter
