@@ -30,7 +30,6 @@ const registerControlller = async (req,res)=>{
       message: "User already exist"+","+(isuserAlreadyExist.email === email ? "email already exist":"username already exist")
     })
   }
-
   // const hash = crypto.createHash("sha256").update(password).digest("hex")
   const hash = await bcrypt.hash(password,10)   //change simple password into hash using bcrypt
 
@@ -42,7 +41,7 @@ const registerControlller = async (req,res)=>{
     profileImage,
   })
   const token = jwt.sign(
-    {id: user._id,},
+    {id: user._id, username: user.username},
     process.env.JWT_SECRET,
     {expiresIn: "1d"},
   )
@@ -82,7 +81,8 @@ const loginController = async (req,res)=>{
   }
   const token = jwt.sign(
     {
-      id: user._id
+      id: user._id,
+      username: user.username,
     },
     process.env.JWT_SECRET,
     {expiresIn: '1d'}
