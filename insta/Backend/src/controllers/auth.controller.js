@@ -58,12 +58,12 @@ const registerControlller = async (req,res)=>{
 }
 
 const loginController = async (req,res)=>{
-  const {username,email,password} = req.body
+  const {identifier ,password} = req.body
   //* username ke basis par ya fir email ke basis par (koi ek )
   const user = await userModel.findOne({
     $or:[
-      {username},
-      {email},
+      {username: identifier},
+      {email: identifier},
     ]
   })
   if(!user){
