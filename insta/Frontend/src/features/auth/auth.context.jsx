@@ -13,7 +13,6 @@ export function AuthProvider({children}){
       const response = await register(username, email, password) 
       setuser(response.user)
       console.log(response.user);
-      
     }catch(err){
       throw err
     }

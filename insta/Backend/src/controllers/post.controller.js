@@ -4,6 +4,7 @@ const { toFile } = require("@imagekit/nodejs")
 const { Folders } = require("@imagekit/nodejs/resources.js")
 const jwt = require("jsonwebtoken")
 const userModel = require("../model/user.model")
+const likeModel = require("../model/like.model")
 
 const imagekit = new imageKit({
   privateKey: process.env.IMAGEKIT_PRIVATEKEY
@@ -64,9 +65,31 @@ const getPostDetailController = async (req,res)=>{
   })
 }
 
+const getFeedController = async (req,res)=>{
+  const user = req.user
+
+  const allPosts = await Promise.all((await postModel.find().populate("user").lean()) //we used .lean() coz moonge not add new elem without this like here we r trying to add isliked
+    .map(async (post)=>{       // <- we made it async meanns now it return promises so we have to wrap all thing with await promise.all() it resolve all promise 
+      // console.log(post.caption)
+      const isliked = await likeModel.findOne({
+        user: user.username,
+        post: post._id,
+      })
+      // console.log(typeof post)
+      post.isliked = Boolean(isliked)
+      return post
+    }))
+
+  res.status(201).json({
+    message: "feed generated successfully",
+    allPosts,
+  })
+} 
+
 
 module.exports = {
   createPostController,
   getPostsController,
   getPostDetailController,
+  getFeedController
 }

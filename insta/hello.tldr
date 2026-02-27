@@ -53,7 +53,7 @@
 			"props": {
 				"color": "black",
 				"size": "m",
-				"w": 559.0711116207785,
+				"w": 2278.2885466402213,
 				"font": "draw",
 				"textAlign": "start",
 				"autoSize": true,
@@ -86,7 +86,97 @@
 											"content": [
 												{
 													"type": "text",
-													"text": "State Layer"
+													"text": "State Layer :- sates manage karna "
+												}
+											]
+										},
+										{
+											"type": "orderedList",
+											"attrs": {
+												"dir": "auto",
+												"start": 1,
+												"type": null
+											},
+											"content": [
+												{
+													"type": "listItem",
+													"attrs": {
+														"dir": "auto"
+													},
+													"content": [
+														{
+															"type": "paragraph",
+															"attrs": {
+																"dir": "auto"
+															},
+															"content": [
+																{
+																	"type": "text",
+																	"text": " {like loading , user ki value , user loggedin hai ya nahi}"
+																}
+															]
+														}
+													]
+												},
+												{
+													"type": "listItem",
+													"attrs": {
+														"dir": "auto"
+													},
+													"content": [
+														{
+															"type": "paragraph",
+															"attrs": {
+																"dir": "auto"
+															},
+															"content": [
+																{
+																	"type": "text",
+																	"text": "post list ko"
+																}
+															]
+														}
+													]
+												},
+												{
+													"type": "listItem",
+													"attrs": {
+														"dir": "auto"
+													},
+													"content": [
+														{
+															"type": "paragraph",
+															"attrs": {
+																"dir": "auto"
+															},
+															"content": [
+																{
+																	"type": "text",
+																	"text": "error manage karna "
+																}
+															]
+														}
+													]
+												},
+												{
+													"type": "listItem",
+													"attrs": {
+														"dir": "auto"
+													},
+													"content": [
+														{
+															"type": "paragraph",
+															"attrs": {
+																"dir": "auto"
+															},
+															"content": [
+																{
+																	"type": "text",
+																	"text": "user "
+																}
+															]
+														}
+													]
 												}
 											]
 										}
@@ -102,9 +192,9 @@
 			"typeName": "shape"
 		},
 		{
-			"x": 976.9523509279136,
-			"y": 252.79186515531615,
-			"z": 0.4636505169208826,
+			"x": 497.3570737065673,
+			"y": 170.8876623675232,
+			"z": 0.4595904984991869,
 			"meta": {},
 			"id": "camera:page:page",
 			"typeName": "camera"
@@ -147,8 +237,8 @@
 			"typeName": "shape"
 		},
 		{
-			"x": -570.3911218977992,
-			"y": 489.6315206955508,
+			"x": -592.7925008533539,
+			"y": 832.6100968275096,
 			"rotation": 0,
 			"isLocked": false,
 			"opacity": 1,
@@ -158,7 +248,7 @@
 			"props": {
 				"color": "black",
 				"size": "m",
-				"w": 493.31116753270203,
+				"w": 1677.356331054266,
 				"font": "draw",
 				"textAlign": "start",
 				"autoSize": true,
@@ -191,7 +281,7 @@
 											"content": [
 												{
 													"type": "text",
-													"text": "Apt Layer"
+													"text": "Api Layer :- backend se communicate karna"
 												}
 											]
 										}
@@ -207,10 +297,12 @@
 			"typeName": "shape"
 		},
 		{
-			"editingShapeId": null,
+			"editingShapeId": "shape:CcUDgs-Xu1X8V-q0t6i1j",
 			"croppingShapeId": null,
-			"selectedShapeIds": [],
-			"hoveredShapeId": null,
+			"selectedShapeIds": [
+				"shape:CcUDgs-Xu1X8V-q0t6i1j"
+			],
+			"hoveredShapeId": "shape:CcUDgs-Xu1X8V-q0t6i1j",
 			"erasingShapeIds": [],
 			"hintingShapeIds": [],
 			"focusedGroupId": null,
@@ -231,7 +323,7 @@
 			"props": {
 				"color": "black",
 				"size": "m",
-				"w": 162.03515625,
+				"w": 1934.1077123700807,
 				"font": "draw",
 				"textAlign": "start",
 				"autoSize": true,
@@ -264,7 +356,7 @@
 											"content": [
 												{
 													"type": "text",
-													"text": "UI Layer"
+													"text": "UI Layer :- UI dikhana aur user ko nevigate karna"
 												}
 											]
 										}
@@ -291,7 +383,7 @@
 			"props": {
 				"color": "black",
 				"size": "m",
-				"w": 579.2922254648548,
+				"w": 2064.4726313037163,
 				"font": "draw",
 				"textAlign": "start",
 				"autoSize": true,
@@ -324,7 +416,7 @@
 											"content": [
 												{
 													"type": "text",
-													"text": "Hooks Layer"
+													"text": "Hooks Layer :- manage karna {State and Api layer} ko"
 												}
 											]
 										}
@@ -384,7 +476,7 @@
 		{
 			"meta": {},
 			"id": "page:page",
-			"name": "Page 1",
+			"name": "frontend integration",
 			"index": "a1",
 			"typeName": "page"
 		},
@@ -399,8 +491,9 @@
 			"followingUserId": null,
 			"opacityForNextShape": 1,
 			"stylesForNextShape": {
-				"tldraw:geo": "oval",
-				"tldraw:dash": "dotted"
+				"tldraw:size": "xl",
+				"tldraw:dash": "dashed",
+				"tldraw:font": "draw"
 			},
 			"brush": null,
 			"scribbles": [],
@@ -415,8 +508,8 @@
 			"screenBounds": {
 				"x": 0,
 				"y": 0,
-				"w": 1230,
-				"h": 760.8333129882812
+				"w": 1193.333251953125,
+				"h": 563.3333129882812
 			},
 			"insets": [
 				false,

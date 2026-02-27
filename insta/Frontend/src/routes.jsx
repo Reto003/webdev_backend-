@@ -1,20 +1,24 @@
 import {createBrowserRouter, BrowserRouter, Routes, Route} from "react-router-dom"
 import Register from "./features/auth/pages/Register"
 import Login from './features/auth/pages/Login'
+import Home from "./features/post/pages/Home"
 
 //~ React Router v6.4+ 
 export const routes = createBrowserRouter([
   {
     path:"/",
-    element:(<h1>Welcome to the App</h1>)
+    element:(
+      <Home/>
+    )
+      
   },
   {
     path:"/register",
-    element:(<Register />)
+    element: <Register />
   },
   {
     path:"/login",
-    element:(<Login />)
+    element: <Login />
   }
 ])
 

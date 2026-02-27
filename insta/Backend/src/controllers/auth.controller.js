@@ -65,7 +65,7 @@ const loginController = async (req,res)=>{
       {username: identifier},
       {email: identifier},
     ]
-  })
+  }).select("+password")
   if(!user){
     return res.status(404).json({
       message: "user not exist,try another username or register yourself first"

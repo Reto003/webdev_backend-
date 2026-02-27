@@ -13,12 +13,13 @@ const userSchema = new mongoose.Schema({
   },
   password:{
     type: String,
-    required:[true, "password is required"]
+    required:[true, "password is required"],
+    select: false      // promlem in login time but it has solution in logincontroller use .select(+password)
   },
   bio: String,
   profileImage:{
     type: String,
-    default: "https://ik.imagekit.io/kpk0d81oh/default-avatar-profile-icon-of-social-media-user-photo-image-vector.jpg",
+    default: "https://ik.imagekit.io/kpk0d81oh/default-avatar-profile-icon-of-social-media-user-photo-image-vector.jpg?updatedAt=1771168623728"
   }
 
 });
