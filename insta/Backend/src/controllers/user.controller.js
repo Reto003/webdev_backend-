@@ -56,7 +56,6 @@ const rejectFollowReqController = async (req,res)=>{
   },{status:"rejected"},{new:"true"})
 }
 
-
 const unfollowUserController = async (req, res)=>{
   const followerId = req.user.username
   const followingId = req.params.username
@@ -90,69 +89,67 @@ const allFollowingsController = async (req,res)=>{
 }
 
 //like controllers
-const likeController = async (req,res)=>{
-  const username = req.user.username
-  const postId = req.params.id
+// const likeController = async (req,res)=>{
+//   const username = req.user.username
+//   const postId = req.params.id
   
-  // // const post = await postModel.findById(postId)
-  // // if(!post){
-  // //   return res.status(404).json({
-  // //     message: "post doesn't exist"
-  // //   })
-  // // }
+//   // // const post = await postModel.findById(postId)
+//   // // if(!post){
+//   // //   return res.status(404).json({
+//   // //     message: "post doesn't exist"
+//   // //   })
+//   // // }
 
-  // if we don't cheack this, fir bhi ye like nhi hota kyuki hamne index({post:1,user:1}) kar rakhi h in likeModel, but still ye karna achhi baat h
-  const isAlreadyLiked = await likeModel.findOne({
-    post: postId,
-    user: username,
-  }) 
-  if(isAlreadyLiked){
-    return res.status(201).json({
-      message: "you already liked it"
-    })
-  }
+//   // if we don't cheack this, fir bhi ye like nhi hota kyuki hamne index({post:1,user:1}) kar rakhi h in likeModel, but still ye karna achhi baat h
+//   const isAlreadyLiked = await likeModel.findOne({
+//     post: postId,
+//     user: username,
+//   }) 
+//   if(isAlreadyLiked){
+//     return res.status(201).json({
+//       message: "you already liked it"
+//     })
+//   }
 
-  const likeRecord = await likeModel.create({
-    post: postId,
-    user: username,
-  })
-  res.status(201).json({
-    message: "post liked successfully",
-    likeRecord
-  })
-}
+//   const likeRecord = await likeModel.create({
+//     post: postId,
+//     user: username,
+//   })
+//   res.status(201).json({
+//     message: "post liked successfully",
+//     likeRecord
+//   })
+// }
 
-const unlikeController = async (req,res)=>{
-  const username = req.user.username
-  const postId = req.params.id
+// const unlikeController = async (req,res)=>{
+//   const username = req.user.username
+//   const postId = req.params.id
 
-  const isLiked = await likeModel.findOne({
-    post: postId,
-    user: username,
-  }) 
-  if(!isLiked){
-    return res.status(201).json({
-      message: "u didn't liked it in firstPlace , and u expect for unlike it wow"
-    })
-  }
+//   const isLiked = await likeModel.findOne({
+//     post: postId,
+//     user: username,
+//   }) 
+//   if(!isLiked){
+//     return res.status(201).json({
+//       message: "u didn't liked it in firstPlace , and u expect for unlike it wow"
+//     })
+//   }
 
-  await likeModel.findOneAndDelete({
-    post: postId,
-    user: username,
-  })
-  res.status(201).json({
-    message: "unliked successfully"
-  })
+//   await likeModel.findOneAndDelete({
+//     post: postId,
+//     user: username,
+//   })
+//   res.status(201).json({
+//     message: "unliked successfully"
+//   })
 
-}
+// }
 
 module.exports = {
   followUserController,
   unfollowUserController,
   allFollowersController,
   allFollowingsController,
-  likeController,
-  unlikeController,
   accceptFollowReqController,
   rejectFollowReqController,
 }

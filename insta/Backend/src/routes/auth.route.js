@@ -8,12 +8,12 @@ const authRouter = express.Router()
 /*
   * post  /api/auth/register
 */
-authRouter.post("/register",authController.registerControlller)
+authRouter.post("/register", authController.registerControlller)
 
 /*
   * login  /api/auth/login
 */
-authRouter.post("/login",authController.loginController)
+authRouter.post("/login", authController.loginController)
 
 /*
  *  login   /api/auth/getme  

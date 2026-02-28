@@ -4,11 +4,32 @@
   box-sizing: border-box;
 }
 
+
 html, body, #root{
   height: 100%;
   width: 100%;
   scroll-behavior: smooth;
+  color: whitesmoke;
+  font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
 }
+
+//nav components
+svg{
+  color: rgb(240, 238, 238);
+}
+.show{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 2.8rem;
+  width: 2.8rem;
+  border-radius: 10px;
+  &:hover{
+    transition: all 0.1s ease-in;
+    background-color: rgba(255, 255, 255, 0.159);
+  }
+}
+
 
 .home{
   min-height: 100vh;
@@ -25,6 +46,7 @@ html, body, #root{
   padding-block: 1rem;
   position: sticky;
   top: 0;
+  left: 0;
   .up{
     display: flex;
     justify-content: center;
@@ -38,7 +60,7 @@ html, body, #root{
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    gap: 2.2rem;
+    gap: 1.5rem;
     img{
       width: 2rem;
       border-radius: 50%;
@@ -58,14 +80,17 @@ html, body, #root{
 }
 
 .feed-page{
-  width: 100%;
+  width: 50%;
   min-height: 100vh;
-  margin-left: 15vmax;
-
+  // background: #c74343;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
   .post{
-    // background-color: rgb(11, 11, 11);
-    height: 44rem;
-    width: 30rem;
+    // background-color: rgb(80, 37, 37);
+    height: 47rem;
+    width: 28rem;
     display: flex;
     flex-direction: column;
     justify-content: space-between;
@@ -116,8 +141,6 @@ html, body, #root{
       display: flex;
       padding-inline: 1rem;
 
-      
-
       .left{
         display: flex;
         align-items: center;
@@ -149,3 +172,82 @@ html, body, #root{
     }
   }
 }
+
+//for createpost
+.create-post-page{
+  display: flex;
+  flex-direction: column;
+  background-color: transparent;
+  gap: 1rem;
+  .form-container{
+    height: 43rem;
+    width: 45rem;
+    background-color: #202328;
+    border-radius: 0.5rem 1rem ;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    form{
+      height: 100%;
+      width: 100%;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      // justify-content: space-betwee;
+      
+      .post{
+        height: 70%;
+        width: 100%;
+        gap: 2rem;
+        display: flex;
+        align-items: center;
+        flex-direction: column;
+        justify-content: center;
+        .btn{
+          // height: 2rem;
+          // width: 10rem;
+          padding: 0.6rem 1.5rem;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          background-color: #405DE6;
+          border-radius: 0.5rem;
+        }
+      }
+      .line{
+        height: 1px;
+        width: 100%;
+        background-color: #343434;
+      }
+      .caption-box{
+        height: 22%;
+        width: 100%;
+        display: flex;
+        align-items: flex-start;
+        justify-content: center;
+          padding-inline-end: 1rem;
+        input{
+          width: 100%;
+          background: transparent;
+          // background-color: #833AB4;
+          color: whitesmoke;
+          font-size: 1.1rem;
+          align-self: flex-start;
+        }
+        button{
+          align-self: flex-end;
+          white-space: nowrap;
+        }
+      }
+    }
+
+  }
+  .postbtn{
+    height: 5rem;
+    width: 5rem;
+    border-radius: 50%;
+    background-color: #FA8E21;
+  }
+}
+

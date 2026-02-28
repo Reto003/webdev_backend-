@@ -13,10 +13,4 @@ userRouter.delete("/unfollow/:username", identifyUser, userController.unfollowUs
 
 userRouter.get("/followers", identifyUser, userController.allFollowersController)
 
-userRouter.post("/like/:id",identifyUser, userController.likeController)
-
-userRouter.delete("/unlike/:id",identifyUser, userController.unlikeController)
-
-
-
 module.exports = userRouter

@@ -12,23 +12,35 @@ const imagekit = new imageKit({
 
 
 const createPostController = async (req,res)=>{
-  console.log(req.body, req.file)
+  try {
+    if (!req.file) {
+      return res.status(400).json({
+        message: "image file is required"
+      })
+    }
 
-  const file = await imagekit.files.upload({
-    file: await toFile(Buffer.from(req.file.buffer),'file'),
-    fileName: req.file.originalname,
-    folder: "insta-clone"
-  })
-  // res.send(file)
+    const file = await imagekit.files.upload({
+      file: await toFile(Buffer.from(req.file.buffer), "file"),
+      fileName: req.file.originalname,
+      folder: "insta-clone"
+    })
 
-  const post = await postModel.create({
-    caption: req.body.caption,
-    imgUrl: file.url,
-    user: req.user.id
-  })
-  res.status(201).json({
-    message: "post created successfully"
-  })
+    const post = await postModel.create({
+      caption: req.body.caption,
+      imgUrl: file.url,
+      user: req.user.id
+    })
+
+    res.status(201).json({
+      message: "post created successfully",
+      post
+    })
+  } catch (error) {
+    console.log(error)
+    res.status(500).json({
+      message: "failed to create post"
+    })
+  }
 }
 
 const getPostsController = async (req,res)=>{
@@ -67,7 +79,7 @@ const getPostDetailController = async (req,res)=>{
 
 const getFeedController = async (req,res)=>{
   const user = req.user
-
+                                                          //! .sort({_id: -1})  mehtod for reverse order  
   const allPosts = await Promise.all((await postModel.find().populate("user").lean()) //we used .lean() coz moonge not add new elem without this like here we r trying to add isliked
     .map(async (post)=>{       // <- we made it async meanns now it return promises so we have to wrap all thing with await promise.all() it resolve all promise 
       // console.log(post.caption)
@@ -86,10 +98,69 @@ const getFeedController = async (req,res)=>{
   })
 } 
 
+const likeController = async (req,res)=>{
+  const username = req.user.username
+  const postId = req.params.postId
+
+  const post = await postModel.findById(postId)
+  if(!post){
+    return res.status(409).json({
+      message: "there is no such post"
+    })
+  }
+
+  const like = await likeModel.create({
+    post: postId,
+    user: username,
+  })
+  res.status(201).json({
+    message: "post liked successfully",
+    like
+  })
+}
+
+const unlikeController = async (req,res)=>{
+  const username = req.user.username
+  const postId = req.params.postId
+
+  const isLiked = await likeModel.findOne({
+    post: postId,
+    user: username,
+  }) 
+  if(!isLiked){
+    return res.status(201).json({
+      message: "u didn't liked it in firstPlace , and u expect for unlike it wow"
+    })
+  }
+
+  await likeModel.findOneAndDelete({
+    post: postId,
+    user: username,
+  })
+  return res.status(201).json({
+    message: "unliked successfully"
+  })
+
+}
+
+// const getLikedPostController = async (req,res)=>{
+//   const user = req.user
+//   const allLikedPosts = await likeModel.find({
+//     user: user.username,
+//   }).populate(["post","user"])
+//   res.status(201).json({
+//     message:"successfully fetched liked posts",
+//     allLikedPosts,
+//   })
+//   console.log(user.username)
+// }
 
 module.exports = {
   createPostController,
   getPostsController,
   getPostDetailController,
-  getFeedController
+  getFeedController,
+  likeController,
+  unlikeController,
+  // getLikedPostController
 }

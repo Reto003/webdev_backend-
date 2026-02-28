@@ -2,7 +2,6 @@ import React, {useEffect} from 'react'
 import Post from './Post';
 import { usePost } from '../hooks/usePost'
 
-
 const Feed = ()=>{  
   const {loading, feed, handleGetFeed} = usePost()
 
@@ -17,7 +16,6 @@ const Feed = ()=>{
     )
   }
   console.log(feed)
-  
 
   return (
     <div className="feed-page">

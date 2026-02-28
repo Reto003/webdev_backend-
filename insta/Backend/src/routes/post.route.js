@@ -31,4 +31,16 @@ postRouter.get("/details/:postId", identifyUser, postController.getPostDetailCon
  */
 postRouter.get("/feed", identifyUser, postController.getFeedController)
 
+/**
+ *  can like any post
+ */
+postRouter.post("/like/:postId", identifyUser, postController.likeController)
+
+postRouter.delete("/unlike/:postId", identifyUser, postController.unlikeController)
+
+/**
+ * get all likedPost of loged in user
+ */
+// postRouter.get("/getLikedPosts",identifyUser, postController.getLikedPostController)
+
 module.exports = postRouter
