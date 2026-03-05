@@ -69,7 +69,7 @@ const loginController = async (req,res)=>{
   if(!user){
     return res.status(404).json({
       message: "user not exist,try another username or register yourself first"
-    })
+    }) 
   }
   // const hashed = crypto.createHash("sha256").update(password).digest("hex")
   // const isPasswordValid = (user.password === hashed)
