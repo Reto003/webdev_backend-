@@ -17,10 +17,12 @@ app.use(cors({
   credentials: true
 }))
 
-const { authRouter } = require("./routes/auth.route")
 
+const { authRouter } = require("./routes/auth.route")
+const {songRouter} = require("./routes/song.route")
 
 app.use("/api/auth",authRouter)
+app.use("/api/song",songRouter)
 
 
 

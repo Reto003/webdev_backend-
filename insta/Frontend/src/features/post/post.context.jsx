@@ -36,10 +36,7 @@ export const PostContextProvider = ({ children }) => {
     setloading(false)
   }
 
-  useEffect(()=>{
-    handleGetFeed()
-  },[])
-
+  
   const handleLike = async (post)=>{
     const data = await likePost(post)
     await handleGetFeed()
@@ -48,7 +45,10 @@ export const PostContextProvider = ({ children }) => {
     const data = await unlikePost(post)
     await handleGetFeed()
   }
-
+  
+  useEffect(()=>{
+    handleGetFeed()
+  },[])
 
   return (
     <PostContext.Provider value={{loading, post, feed, handleGetFeed, handleCreatePost, handleLikedFeed, handleLike, handleUnLike}} >

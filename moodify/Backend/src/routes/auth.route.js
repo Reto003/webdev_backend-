@@ -14,5 +14,5 @@ authRouter.get("/getme", authMiddleware.identifyUser, authController.getMe)
 authRouter.get("/logout", authController.logoutUser)
 
 module.exports = {
-  authRouter,
+  authRouter, 
 }
