@@ -25,6 +25,23 @@ export const init = async ({ landmarkerRef, videoRef, streamRef }) => {
     await videoRef.current.play();
 };
 
+export const stopCameraStream = ({ landmarkerRef, videoRef, streamRef }) => {
+    if (landmarkerRef.current) {
+        landmarkerRef.current.close();
+        landmarkerRef.current = null;
+    }
+
+    if (streamRef.current) {
+        streamRef.current.getTracks().forEach((track) => track.stop());
+        streamRef.current = null;
+    }
+
+    if (videoRef.current) {
+        videoRef.current.pause();
+        videoRef.current.srcObject = null;
+    }
+};
+
 export const detect = ({ landmarkerRef, videoRef, setExpression }) => {
     if (!landmarkerRef.current || !videoRef.current) return;
 
@@ -51,13 +68,15 @@ export const detect = ({ landmarkerRef, videoRef, setExpression }) => {
         let currentExpression = "Neutral";
 
         if (smileLeft > 0.5 && smileRight > 0.5) {
-            currentExpression = "Happy 😄";
+            currentExpression = "happy";
         } else if (jawOpen > 0.2 && browUp > 0.2) {
-            currentExpression = "Surprised 😲";
-        } else if (frownLeft > 0.0001 && frownRight > 0.0001) {
-            currentExpression = "Sad 😢";
+            currentExpression = "surprised";
+        } else if (frownLeft > 0.0005 && frownRight > 0.0005) {
+            currentExpression = "sad";
         }
 
-        setExpression(currentExpression);
+        setExpression(currentExpression)
+
+        return currentExpression
     }
 };

@@ -1,0 +1,153 @@
+.player-card {
+  position: relative;
+  display: grid;
+  grid-template-columns: minmax(220px, 280px) minmax(280px, 420px);
+  gap: 2rem;
+  align-items: center;
+  width: min(100vw, 1000px);
+  margin: 2rem auto;
+  padding: 1.5rem;
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 25px;
+  background:
+    linear-gradient(145deg, rgba(255, 255, 255, 0.09), rgba(255, 255, 255, 0.02)),
+    radial-gradient(circle at top left, rgba(255, 127, 80, 0.24), transparent 40%),
+    #131417;
+  box-shadow: 0 24px 80px rgba(0, 0, 0, 0.35);
+  overflow: hidden;
+}
+
+.player-card__visual {
+  position: relative;
+}
+
+.player-card__poster {
+  position: relative;
+  z-index: 2;
+  display: block;
+  width: 100%;
+  aspect-ratio: 1 / 1;
+  object-fit: cover;
+  border-radius: 24px;
+  box-shadow: 0 20px 48px rgba(0, 0, 0, 0.35);
+}
+
+.player-card__glow {
+  position: absolute;
+  inset: auto 10% -6% 10%;
+  height: 32px;
+  border-radius: 999px;
+  background: rgba(255, 138, 101, 0.55);
+  filter: blur(28px);
+}
+
+.player-card__body {
+  display: flex;
+  flex-direction: column;
+  gap: 1.4rem;
+}
+
+.player-card__meta {
+  display: flex;
+  flex-direction: column;
+  gap: 0.35rem;
+}
+
+.player-card__eyebrow {
+  color: #ffb494;
+  font-size: 0.8rem;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+}
+
+.player-card__title {
+  color: #fff6ee;
+  font-size: clamp(1.6rem, 2vw, 2.5rem);
+  line-height: 1;
+  letter-spacing: -0.04em;
+}
+
+.player-card__mood {
+  color: rgba(255, 255, 255, 0.72);
+  font-size: 0.95rem;
+}
+
+.player-card__progress {
+  display: flex;
+  flex-direction: column;
+  gap: 0.55rem;
+}
+
+.player-card__slider {
+  width: 100%;
+  accent-color: #ff835f;
+  cursor: pointer;
+}
+
+.player-card__time {
+  display: flex;
+  justify-content: space-between;
+  color: rgba(255, 255, 255, 0.72);
+  font-size: 0.85rem;
+}
+
+.player-card__controls {
+  display: flex;
+  gap: 0.9rem;
+  align-items: center;
+}
+
+.player-card__chip,
+.player-card__play,
+.player-card__speed {
+  border: 0;
+  color: #fff;
+}
+
+.player-card__chip {
+  padding: 0.9rem 1.15rem;
+  border-radius: 999px;
+  background: rgba(255, 255, 255, 0.08);
+}
+
+.player-card__play {
+  min-width: 140px;
+  padding: 1rem 1.4rem;
+  border-radius: 999px;
+  background: linear-gradient(135deg, #ff835f, #ff5d73);
+  box-shadow: 0 18px 28px rgba(255, 93, 115, 0.28);
+  font-weight: 700;
+}
+
+.player-card__footer {
+  display: flex;
+  align-items: center;
+  gap: 0.8rem;
+}
+
+.player-card__speed-label {
+  color: rgba(255, 255, 255, 0.78);
+  font-size: 0.92rem;
+}
+
+.player-card__speed {
+  padding: 0.8rem 1rem;
+  border-radius: 14px;
+  background: rgba(255, 255, 255, 0.08);
+}
+
+@media (max-width: 760px) {
+  .player-card {
+    grid-template-columns: 1fr;
+    padding: 1.1rem;
+    gap: 1.25rem;
+  }
+
+  .player-card__controls {
+    flex-wrap: wrap;
+  }
+
+  .player-card__play {
+    flex: 1 1 100%;
+  }
+}

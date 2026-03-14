@@ -48,7 +48,7 @@ const getSongs = async (req,res)=>{
   ]);
   res.status(200).json({
     message: "songs retrieved successfully",
-    song
+    song: song[0]|| null
   })
 }
 
