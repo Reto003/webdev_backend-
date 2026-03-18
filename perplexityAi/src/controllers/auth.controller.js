@@ -1,6 +1,6 @@
-import { text } from 'express';
 import  userModel from '../models/user.model.js';
 import { sendVerificationEmail } from '../services/mail.service.js';
+import jwt from 'jsonwebtoken';
 
 export const register = async (req, res) => { 
 
@@ -25,6 +25,9 @@ export const register = async (req, res) => {
     email,
     password
   })
+  const emailVerificationToken = jwt.sign({
+    email: user.email,
+  }, process.env.JWT_SECRET, { expiresIn: '1d' })
 
   await sendVerificationEmail({
     to: user.email,
@@ -33,7 +36,7 @@ export const register = async (req, res) => {
     html: `
       <p>Hi ${user.username},</p>
       <p>Thank you for registering at perplexityAi! Please verify your email address by clicking the link below:</p>
-      <a href="http://localhost:3000/verify-email?email=${user.email}">Verify Email</a>
+      <a href="http://localhost:3000/api/auth/verify-email?token=${emailVerificationToken}">Verify Email</a>
       <p>Best regards,<br>The perplexityAi Team</p>
     `
   })
@@ -46,4 +49,43 @@ export const register = async (req, res) => {
       verified: user.verified 
     }
   })
+}
+
+
+
+export const verifyEmail = async (req, res)=>{
+  const { token } = req.query
+  const decoded = jwt.verify(token, process.env.JWT_SECRET)
+
+  if(!token) {
+    return res.status(400).json({
+      message: 'Verification token is missing',
+      success: false,
+      error: 'Token is required for email verification'
+    })
+  }
+  
+  const user = await userModel.findOne({ email: decoded.email })
+  if (!user) {
+    return res.status(404).json({
+      message: 'User not found',
+      success: false,
+      error: 'Invalid verification token'
+    })
+  }
+
+  user.verified = true
+  await user.save()
+
+  // return res.status(200).json({
+  //   message: 'Email verified successfully',
+  //   success: true
+  // })
+
+  const html =`
+    <h1>Email Verified Successfully</h1>
+    <p>Thank you for verifying your email. You can now log in to your account.</p>
+    <a href="/login">go to login</a>
+  `
+  return res.status(200).send(html)
 }
