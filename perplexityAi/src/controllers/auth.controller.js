@@ -1,6 +1,7 @@
 import  userModel from '../models/user.model.js';
 import { sendVerificationEmail } from '../services/mail.service.js';
 import jwt from 'jsonwebtoken';
+import bcrypt from 'bcryptjs';
 
 export const register = async (req, res) => { 
 
@@ -51,7 +52,49 @@ export const register = async (req, res) => {
   })
 }
 
+export const login = async (req,res)=>{
+  const {email, password} = req.body
 
+  const user = await userModel.findOne({email}).select('+password')
+  if(!user){
+    return res.status(404).json({
+      message: 'User not found',
+      success: false,
+      error: 'No user found with this email'
+    })
+  }
+
+  const isPasswordMatch = await bcrypt.compare(password, user.password)
+  if (!isPasswordMatch) {
+    return res.status(401).json({
+      message: 'Invalid credentials',
+      success: false,
+      error: 'Incorrect password'
+    })
+  }
+
+  if(!user.verified) {
+    return res.status(403).json({
+      message: 'Email not verified',
+      success: false,
+      error: 'Please verify your email before logging in'
+    })
+  }
+
+  const token = jwt.sign({
+    id: user._id,
+  }, process.env.JWT_SECRET, { expiresIn: '1d' })
+  res.cookie('token', token)
+
+  res.status(200).json({
+    message: 'Login successful',
+    success: true,
+    user: {
+      username: user.username,
+      email: user.email,
+    }
+  })
+}
 
 export const verifyEmail = async (req, res)=>{
   const { token } = req.query
@@ -88,4 +131,25 @@ export const verifyEmail = async (req, res)=>{
     <a href="/login">go to login</a>
   `
   return res.status(200).send(html)
+}
+
+
+export const getMe = async (req, res) => {
+  const userId = req.user._id
+
+  const user = await userModel.findOne({userId})
+
+  if(!user){
+    return res.status(400).json({
+      message: "user not found",
+      success: false,
+      err: "user not found"
+    })
+  }
+
+  res.status(200).json({
+    message: "user details fetched successfully",
+    success: true,
+    user
+  })
 }

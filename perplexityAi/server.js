@@ -3,8 +3,10 @@ import app from './src/app.js'
 import dotenv from 'dotenv/config'
 // dotenv.config()
 
-const PORT = process.env.PORT || 5000
+import {testAi} from './src/services/ai.service.js'
+testAi()
 
+const PORT = process.env.PORT || 5000
 connectToDB()
   .catch((err)=>{
     console.log("MongoDB connection failed:", err)
