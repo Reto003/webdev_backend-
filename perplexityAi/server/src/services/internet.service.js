@@ -1,3 +1,16 @@
-import {tavily as Tavily} from 'tavily'
+import {tavily as Tavily} from '@tavily/core'
 
-tavily = TavilyClient(api_key=process.env.TAVILY_API_KEY)
+const tavily = Tavily({
+  apiKey: process.env.TAVILY_API_KEY
+})
+
+export const searchInternet = async ({query})=>{
+  const results = await tavily.search(query, {
+    maxResults: 5,
+    searchDepth: "advanced"
+  })
+
+  // console.log("Tavily results:", results)
+
+  return JSON.stringify(results)
+}
